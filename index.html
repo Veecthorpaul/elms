@@ -1,197 +1,118 @@
-
-<?php
-session_start();
-error_reporting(0);
-include('includes/config.php');
-if(isset($_POST['signin']))
-{
-$uname=$_POST['username'];
-$password=md5($_POST['password']);
-$sql ="SELECT EmailId,Password,Status,id FROM tblemployees WHERE EmailId=:uname and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':uname', $uname, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0)
-{
- foreach ($results as $result) {
-    $status=$result->Status;
-    $_SESSION['eid']=$result->id;
-  } 
-if($status==0)
-{
-$msg="Your account is Inactive. Please contact admin";
-} else{
-$_SESSION['emplogin']=$_POST['username'];
-echo "<script type='text/javascript'> document.location = 'myprofile.php'; </script>";
-} }
-
-else{
-  
-  echo "<script>alert('Invalid Details');</script>";
-
-}
-
-}
-
-?><!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        
-        <!-- Title -->
-        <title>ERP SYSTEM | Home Page</title>
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <meta charset="UTF-8">
-        <meta name="description" content="Responsive Admin Dashboard Template" />
-        <meta name="keywords" content="admin,dashboard" />
-        <meta name="author" content="Steelcoders" />
-        
-        <!-- Styles -->
-        <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css"/>
-             <link href="assets/css/materialdesign.css" rel="stylesheet">
-        <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">        
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        	
-        <!-- Theme Styles -->
-        <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
-        
-        
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        
-    </head>
-    <body>
-        <div class="loader-bg"></div>
-        <div class="loader">
-            <div class="preloader-wrapper big active">
-                <div class="spinner-layer spinner-blue">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                    <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                    </div>
-                </div>
-                <div class="spinner-layer spinner-spinner-teal lighten-1">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                    <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                    </div>
-                </div>
-                <div class="spinner-layer spinner-yellow">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                    <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                    </div>
-                </div>
-                <div class="spinner-layer spinner-green">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                    <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                    </div>
-                </div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="candy.css">
+
+    <title>Museum of Candy</title>
+  </head>
+  <body>
+    <nav id="mainNavbar"class="navbar navbar-dark navbar-expand-md py-0 fixed-top">
+    <a href="" class="navbar-brand">CANDY</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navLinks" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navLinks" >
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="" class="nav-link">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">ABOUT</a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link">TICKETS</a>
+            </li>
+        </ul>
+    </div>
+    </nav>
+    <section class="container-fluid py-0">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+            <div id="headingGroup" class="text-white text-center d-none d-lg-block mt-5">
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+        <h1>MUSEUM<span>/</span>OF<span>/</span>CANDY</h1>
+            </div>
+            </div>
+            <div class="col-lg-6 px-0">
+                <img class="img-fluid" src="images/2.jpg" alt="" width="100%">
             </div>
         </div>
-        <div class="mn-content fixed-sidebar">
-            <header class="mn-header navbar-fixed">
-                <nav class="cyan darken-1">
-                    <div class="nav-wrapper row">
-                        <section class="material-design-hamburger navigation-toggle">
-                            <a href="#" data-activates="slide-out" class="button-collapse show-on-large material-design-hamburger__icon">
-                                <span class="material-design-hamburger__layer"></span>
-                            </a>
-                        </section>
-                        <div class="header-title col s3">      
-                            <span class="chapter-title">Saba Store | Employee Portal</span>
-                        </div>
-                      
-                           
-                        </form>
-                     
-                        
-                    </div>
-                </nav>
-            </header>
+    </section>
+    
+    <section class="container-fluid">
+        <div class="row align-items-center content">
+            <div class="col-md-6 px-0 order-2 order-md-1">
+                <img class="img-fluid" src="images/7.jpeg" alt="" width="100%">
+            </div>
+            <div class="col-md-6 text-center order-1 order-md-2 align-items-center">
+               <div class="row justify-content-center px-0">
+               <div class="col-10 col-lg-8 anything px-0">
+                <h2>MUSEUM OF CANDY </h2>
+                <img src="images/icon1.png" alt="" class="d-none d-lg-inline" px-0>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nulla odit fuga commodi aspernatur, sunt ipsum laboriosam fugiat doloribus porro repellat reprehenderit quam consectetur totam sequi vitae temporibus atque.</p>
+            </div>
+        </div>
+            </div>
+        </div>
            
-           
-            <aside id="slide-out" class="side-nav white fixed">
-                <div class="side-nav-wrapper">
-                   
-                  
-                <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion" style="">
-                    <li>&nbsp;</li>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="index.php"><i class="material-icons"></i>Employee Login</a></li>
-                    <li class="no-padding"><a class="waves-effect waves-grey" href="forgot-password.php"><i class="material-icons"></i>Emp Password Recovery</a></li>
-                
-                       <li class="no-padding"><a class="waves-effect waves-grey" href="admin/"><i class="material-icons"></i>Admin Login</a></li>
-                
-                </ul>
-          <div class="footer">
-                    <p class="copyright"><a href="">ERP SYSTEM | SABA STORE </a>©</p>
-                
-                </div>
-                </div>
-            </aside>
-            <main class="mn-inner">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="page-title"><h4>Welcome to Saba Store Employee Portal</h4></div>
-
-                          <div class="col s12 m6 l8 offset-l2 offset-m3">
-                              <div class="card white darken-1">
-
-                                  <div class="card-content ">
-                                      <span class="card-title" style="font-size:20px;">Employee Login</span>
-                                         <?php if($msg){?><div class="errorWrap"><strong>Error</strong> : <?php echo htmlentities($msg); ?> </div><?php }?>
-                                       <div class="row">
-                                           <form class="col s12" name="signin" method="post">
-                                               <div class="input-field col s12">
-                                                   <input id="username" type="text" name="username" class="validate" autocomplete="off" required >
-                                                   <label for="email">Email Id</label>
-                                               </div>
-                                               <div class="input-field col s12">
-                                                   <input id="password" type="password" class="validate" name="password" autocomplete="off" required>
-                                                   <label for="password">Password</label>
-                                               </div>
-                                               <div class="col s12 right-align m-t-sm">
-                                                
-                                                   <input type="submit" name="signin" value="Sign in" class="waves-effect waves-light btn teal">
-                                               </div>
-                                           </form>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                    </div>
-                </div>
-            </main>
+        <div class="row align-items-center content">
+           <div class="col-md-6 text-center align-items-center">
+               <div class="row justify-content-center px-0">
+               <div class="col-10 col-lg-8 anything px-0">
+                <h2>MUSEUM OF CANDY </h2>
+                <img src="images/icon1.png" alt="" class="d-none d-lg-inline" px-0>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nulla odit fuga commodi aspernatur, sunt ipsum laboriosam fugiat doloribus porro repellat reprehenderit quam consectetur totam sequi vitae temporibus atque.</p>
+            </div>
+        </div>
+            </div>
+            <div class="col-md-6 px-0 ">
+                <img class="img-fluid" src="images/8.jpeg" alt="" width="100%">
+            </div>
             
         </div>
-        <div class="left-sidebar-hover"></div>
         
-        <!-- Javascripts -->
-        <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-        <script src="assets/plugins/materialize/js/materialize.min.js"></script>
-        <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-        <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-        <script src="assets/js/alpha.min.js"></script>
-        
-    </body>
+        <div class="row align-items-center content">
+            <div class="col-md-6 px-0 order-2 order-md-1">
+                <img class="img-fluid" src="images/4.jpg" alt="" width="100%">
+            </div>
+            <div class="col-md-6 text-center order-1 order-md-2 align-items-center">
+               <div class="row justify-content-center px-0">
+               <div class="col-10 col-lg-8 anything px-0">
+                <h2>MUSEUM OF CANDY </h2>
+                <img src="images/icon1.png" alt="" class="d-none d-lg-inline" px-0>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam nulla odit fuga commodi aspernatur, sunt ipsum laboriosam fugiat doloribus porro repellat reprehenderit quam consectetur totam sequi vitae temporibus atque.</p>
+            </div>
+        </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script>
+    $(function (){
+        $(document).scroll(function(){
+            var $nav = $("#mainNavbar");
+            $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+        })
+    }); 
+    </script>
+  </body>
 </html>
